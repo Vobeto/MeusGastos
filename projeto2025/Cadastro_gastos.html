@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeusGastos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <header>
+            <div class="pag_atual" >Cadastrar gastos</div>   
+            <div id="logout" title="Sair"><a href="Login_MeusGastos.html"><img src="Icone sair.png" alt="Botão de logout" class="icone"></a></div>
+            <nav>
+            <section class="Menu"> <!--Menu de opções-->
+                <a href="index.html"><div class="MenuItem">Home</div></a> <!--Atenção para adicionar o div dentro do a, pois a ideia é transformar o campo inteiro em um link, e não apenas o testo-->
+                <a href="Calendário.html"><div class="MenuItem">Cadastrar</div></a>
+                <a href="ultimo_mes.html"><div class="MenuItem">Ultimo mes</div></a>
+                <a href="Classes.html"><div class="MenuItem">Principais gastos</div></a>
+                <a href="Perfil.html"><div class="MenuItem">Perfil</div></a>
+                
+            </section>
+            </nav>
+        </header>
+    </nav>
+
+    <main>
+        <div align="center">
+            
+        <button p-align="center" style="font-size: 20px; padding: 3px; border-color: rgb(47, 194, 86); background-color: honeydew; " onclick="cadastrarGasto()">Adicionar Gasto</button></div>
+        <div id="gastos"></div>
+    </main>
+                   
+
+    <nav>
+        <footer>
+            <div class="posicionamento_direitos">
+                <div id="direitos_autorais">&copy;2025 - MeusGastos é uma iniciativa de alunos FAESA. Todos os direitos reservados</div>                    
+            </div>
+        </footer>
+    </nav>
+
+    <script src="Cadastro_gastos.js"></script>
+</body>
+</html>
