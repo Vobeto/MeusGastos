@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MeusGastos</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+<header>
+<div class="pag_atual">Ultimo mes</div>
+<div id="logout" title="Sair"><a href="Login_MeusGastos.html"><img alt="Botão de logout" class="icone" src="Icone sair.png"/></a></div>
+<nav>
+<section class="Menu"> <!--Menu de opções-->
+<a href="index.html"><div class="MenuItem">Home</div></a> <!--Atenção para adicionar o div dentro do a, pois a ideia é transformar o campo inteiro em um link, e não apenas o testo-->
+<a href="Cadastro_gastos.html"><div class="MenuItem">Cadastrar</div></a>
+<a href="ultimo_mes.html"><div class="MenuItem">Ultimo mes</div></a>
+<a href="principais_gastos.html"><div class="MenuItem">Principais gastos</div></a>
+<a href="Perfil.html"><div class="MenuItem">Perfil</div></a>
+</section>
+</nav>
+</header>
+</nav>
+<main><section style="max-width: 800px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.1); text-align: center;"><h2 id="totalMes">Gasto no mês atual: carregando...</h2><h3 id="totalAnterior">Gasto no mês anterior: carregando...</h3><h3 id="diferenca">Diferença: carregando...</h3></section></main>
+<nav>
+<footer>
+<div class="posicionamento_direitos">
+<div id="direitos_autorais">©2025 - MeusGastos é uma iniciativa de alunos FAESA. Todos os direitos reservados</div>
+</div>
+</footer>
+</nav>
+<script src="ultimo_mes.js"></script>
+<script>
+let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+
+let now = new Date();
+let mesAtual = now.getMonth();
+let anoAtual = now.getFullYear();
+let mesAnterior = mesAtual === 0 ? 11 : mesAtual - 1;
+let anoAnterior = mesAtual === 0 ? anoAtual - 1 : anoAtual;
+
+let totalAtual = 0;
+let totalAnt = 0;
+
+gastos.forEach(gasto => {
+    let data = new Date(gasto.data);
+    if (data.getMonth() === mesAtual && data.getFullYear() === anoAtual) {
+        totalAtual += parseFloat(gasto.valor || 0);
+    } else if (data.getMonth() === mesAnterior && data.getFullYear() === anoAnterior) {
+        totalAnt += parseFloat(gasto.valor || 0);
+    }
+});
+
+document.getElementById("totalMes").textContent = "Gasto no mês atual: R$ " + totalAtual.toFixed(2);
+document.getElementById("totalAnterior").textContent = "Gasto no mês anterior: R$ " + totalAnt.toFixed(2);
+
+let dif = totalAtual - totalAnt;
+let diffText = dif.toFixed(2);
+let diffEl = document.getElementById("diferenca");
+
+if (dif > 0) {
+    diffEl.textContent = "Diferença: +" + diffText;
+    diffEl.style.color = "red";
+} else if (dif < 0) {
+    diffEl.textContent = "Diferença: " + diffText;
+    diffEl.style.color = "green";
+} else {
+    diffEl.textContent = "Diferença: R$ 0.00";
+    diffEl.style.color = "black";
+}
+</script></body>
+</html>

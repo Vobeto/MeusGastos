@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MeusGastos</title>
+<link href="styles.css" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+<header>
+<div class="pag_atual">Home</div>
+<div id="logout" title="Sair"><a href="Login_MeusGastos.html"><img alt="Botão de logout" class="icone" src="Icone sair.png"/></a></div>
+<nav>
+<section class="Menu"> <!--Menu de opções-->
+<a href="index.html"><div class="MenuItem">Home</div></a> <!--Atenção para adicionar o div dentro do a, pois a ideia é transformar o campo inteiro em um link, e não apenas o testo-->
+<a href="Cadastro_gastos.html"><div class="MenuItem">Cadastrar</div></a>
+<a href="ultimo_mes.html"><div class="MenuItem">Ultimo mes</div></a>
+<a href="principais_gastos.html"><div class="MenuItem">Principais gastos</div></a>
+<a href="Perfil.html"><div class="MenuItem">Perfil</div></a>
+</section>
+</nav>
+</header><div id="dashboard" style="display: flex; gap: 20px; padding: 20px;"><div class="card" style="flex: 1; background: #f0f0f0; border-radius: 12px; padding: 20px;">Usuário: <span id="nomeUsuario"></span></div><div class="card" style="flex: 1; background: #e0f7fa; border-radius: 12px; padding: 20px;">Total de gastos: R$ <span id="totalGastos" style="font-weight: bold;"></span></div></div>
+</nav>
+<h2 id="Porcent_cat" style="padding: 15px;">Sem dados no momento...</h2>
+<div style="height: 800px;width: 300px; ">
+<canvas "="" id="graficoPizza"></canvas></div>
+<nav>
+<footer>
+<div class="posicionamento_direitos">
+<div id="direitos_autorais">©2025 - MeusGastos é uma iniciativa de alunos FAESA. Todos os direitos reservados</div>
+</div>
+</footer>
+</nav>
+<script src="home.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Simulação do nome do usuário (substitua com autenticação real)
+document.getElementById("nomeUsuario").textContent = localStorage.getItem("nomeUsuario") || "Convidado";
+
+// Cálculo do total de gastos
+let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+let total = gastos.reduce((acc, item) => acc + parseFloat(item.valor || 0), 0);
+document.getElementById("totalGastos").textContent = total.toFixed(2);
+</script></body>
+</html>

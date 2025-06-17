@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Principais Gastos - Controle Financeiro</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="estilo_principais.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Header -->
+<nav>
+<header>
+<div class="pag_atual">Principais gastos</div>
+<div id="logout" title="Sair"><a href="Login_MeusGastos.html"><img alt="Botão de logout" class="icone" src="Icone sair.png"/></a></div>
+<nav>
+<section class="Menu"> <!--Menu de opções-->
+<a href="index.html"><div class="MenuItem">Home</div></a> <!--Atenção para adicionar o div dentro do a, pois a ideia é transformar o campo inteiro em um link, e não apenas o testo-->
+<a href="Cadastro_gastos.html"><div class="MenuItem">Cadastrar</div></a>
+<a href="ultimo_mes.html"><div class="MenuItem">Ultimo mes</div></a>
+<a href="principais_gastos.html"><div class="MenuItem">Principais gastos</div></a>
+<a href="Perfil.html"><div class="MenuItem">Perfil</div></a>
+</section>
+</nav>
+</header>
+</nav>
+<!-- Main Content -->
+<main class="main-content"><section style="max-width: 900px; margin: 30px auto; padding: 20px; display: flex; flex-direction: column; gap: 20px;"><div style="padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background: #fefefe;"><h3>💰 Top 1 Gasto</h3><p id="topGasto">Carregando...</p></div><div style="padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background: #fefefe;"><h3>📂 Top 1 Categoria</h3><p id="topCategoria">Carregando...</p></div><div style="padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); background: #fefefe;"><h3>🏆 Maior Valor</h3><p id="topValor">Carregando...</p></div></section></main>
+<nav>
+<footer>
+<div class="posicionamento_direitos">
+<div id="direitos_autorais">©2025 - MeusGastos é uma iniciativa de alunos FAESA. Todos os direitos reservados</div>
+</div>
+</footer>
+</nav>
+<script src="principais_gastos.js"></script>
+<script>
+let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+
+if (gastos.length === 0) {
+    document.getElementById("topGasto").textContent = "Nenhum gasto registrado.";
+    document.getElementById("topCategoria").textContent = "Nenhum gasto registrado.";
+    document.getElementById("topValor").textContent = "Nenhum gasto registrado.";
+} else {
+    // Top 1 Gasto
+    let maiorGasto = gastos.reduce((max, item) => parseFloat(item.valor) > parseFloat(max.valor) ? item : max, gastos[0]);
+    document.getElementById("topGasto").textContent = `${maiorGasto.descricao || "Sem descrição"} - R$ ${parseFloat(maiorGasto.valor).toFixed(2)}`;
+
+    // Top 1 Categoria por soma total
+    let categoriaSoma = {};
+    gastos.forEach(g => {
+        let cat = g.categoria || "Sem categoria";
+        let val = parseFloat(g.valor || 0);
+        categoriaSoma[cat] = (categoriaSoma[cat] || 0) + val;
+    });
+
+    let topCategoria = Object.entries(categoriaSoma).sort((a, b) => b[1] - a[1])[0];
+    document.getElementById("topCategoria").textContent = `${topCategoria[0]} - R$ ${topCategoria[1].toFixed(2)}`;
+
+    // Top 1 Valor
+    let maiorValor = Math.max(...gastos.map(g => parseFloat(g.valor || 0)));
+    document.getElementById("topValor").textContent = `R$ ${maiorValor.toFixed(2)}`;
+}
+</script></body>
+</html>

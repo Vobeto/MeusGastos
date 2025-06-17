@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MeusGastos</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+.btn-cadastrar {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-cadastrar:hover {
+    background-color: #45a049;
+}
+</style></head>
+<body>
+<nav>
+<header>
+<div class="pag_atual">Cadastrar gastos</div>
+<div id="logout" title="Sair"><a href="Login_MeusGastos.html"><img alt="Botão de logout" class="icone" src="Icone sair.png"/></a></div>
+<nav>
+<section class="Menu"> <!--Menu de opções-->
+<a href="index.html"><div class="MenuItem">Home</div></a> <!--Atenção para adicionar o div dentro do a, pois a ideia é transformar o campo inteiro em um link, e não apenas o testo-->
+<a href="Cadastro_gastos.html"><div class="MenuItem">Cadastrar</div></a>
+<a href="ultimo_mes.html"><div class="MenuItem">Ultimo mes</div></a>
+<a href="principais_gastos.html"><div class="MenuItem">Principais gastos</div></a>
+<a href="Perfil.html"><div class="MenuItem">Perfil</div></a>
+</section>
+</nav>
+</header>
+</nav>
+<main><section style="max-width: 700px; margin: 30px auto; padding: 20px; background: #f9f9f9; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);"><h2 style="text-align: center; margin-bottom: 20px;">Cadastro de Gastos</h2><div align="center">
+<button class="btn-cadastrar" onclick="cadastrarGasto()" p-align="center">Adicionar Gasto</button></div>
+<div id="gastos"></div>
+</section></main>
+<nav>
+<footer>
+<div class="posicionamento_direitos">
+<div id="direitos_autorais">©2025 - MeusGastos é uma iniciativa de alunos FAESA. Todos os direitos reservados</div>
+</div>
+</footer>
+</nav>
+<script src="Cadastro_gastos.js"></script>
+</body>
+</html>
